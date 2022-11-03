@@ -19,17 +19,25 @@ response_dict = r.json()
 repo_dicts = response_dict['items']  # Значення пов'язане з 'items' - це список,
 # що містить низку словників, кожен з яких зберігає данні що до одного окремого сховища Python
 # Зберігаємо цей список словників в repo_dicts
-repo_names, stars, labels = [], [], []
+repo_links, stars, labels = [], [], []
 for repo_dict in repo_dicts:
-    repo_names.append(repo_dict['name'])
+    repo_name = repo_dict['name']
+    repo_url = repo_dict['html_url']
+    repo_link = f"<a href='{repo_url}'>{repo_name}</a"  # Формуємо посилання
+    repo_links.append(repo_link)
     stars.append(repo_dict['stargazers_count'])
 
+    owner = repo_dict['owner']['login']  # Власник
+    description = repo_dict['description']  # Опис
+    label = f"{owner}<br />{description}"  # Формуємо інформацію
+    labels.append(label)
 
 # Зробити візуалізацію
 data = [{
     'type': 'bar',  # Тип діаграми: стовпчикова
-    'x': repo_names,  # Вісь х: назви репозиторіїв
+    'x': repo_links,  # Вісь х: посилання
     'y': stars,  # Вісь у: зірочки
+    'hovertext': labels,  # Підказки
     'marker': {
         'color': 'rgb(60, 100, 150)',  # Блакитний колір стовпчиків
         'line': {'width': 1.5, 'color': 'rgb(25, 25, 25)'}  # Сірий колір завтовшки 1,5 пікселей
