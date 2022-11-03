@@ -28,3 +28,12 @@ print(f"\nKeys: {len(repo_dict)}")  # Виводимо кількість йог
 for key in sorted(repo_dict.keys()):  # Виводимо всі ключі
     print(key)
 
+print('\nSelected information about first repository:')
+print(f"Name: {repo_dict['name']}")  # Назва
+print(f"Owner: {repo_dict['owner']['login']}")  # Власник
+print(f"Stars: {repo_dict['stargazers_count']}")  # Кількість зірок
+print(f"Repository: {repo_dict['html_url']}")  # Посилання
+print(f"Created: {repo_dict['created_at']}")  # Створення
+print(f"Updated: {repo_dict['updated_at']}")  # Останнє оновлення
+print(f"Description: {repo_dict['description']}")  # Опис
+
